@@ -37,9 +37,9 @@ $nim\
 $nodejs\
 $ocaml\
 $perl\
+$python\
 $php\
 $purescript\
-$python\
 $ruby\
 $rust\
 $swift\
@@ -98,7 +98,7 @@ style = "bold red"
 
 
 [python]
-format = '[${symbol}${pyenv_prefix}${version}( \($virtualenv\))]($style) '
+format = '[${symbol}(\($virtualenv\))]($style) '
 symbol = "🐍 "
 
 

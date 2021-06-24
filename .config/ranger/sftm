@@ -1,0 +1,15 @@
+#!/bin/zsh
+#send files to mobile
+if [ $# -eq 0 ]; then
+    printf "please provide arguments"
+elif [ $# -eq 1 ]; then
+    printf "$#"
+    kdeconnect-cli -d $(kdeconnect-cli -l --id-only) --share $1
+else
+    for var in "$@"
+    do
+        kdeconnect-cli -d $(kdeconnect-cli -l --id-only) --share $var
+        echo "$var \n" 
+    done
+fi
+
