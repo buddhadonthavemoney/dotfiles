@@ -13,30 +13,38 @@ Plug 'preservim/nerdcommenter'
 Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'valloric/MatchTagAlways'
+"
 "visual
-Plug 'osyo-manga/vim-brightest'
-Plug 'norcalli/nvim-colorizer.lua'
-Plug 'itchyny/lightline.vim'
-Plug 'preservim/nerdtree'
-Plug 'mhinz/vim-startify'
+Plug 'osyo-manga/vim-brightest' "highlight the word in the cursor
+Plug 'norcalli/nvim-colorizer.lua' "nvim color
+Plug 'itchyny/lightline.vim' "lightline
+Plug 'preservim/nerdtree' "nerdtree
+Plug 'mhinz/vim-startify' "startpage
 
-"programming
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
-Plug 'trishume/syntect'
-Plug 'dart-lang/dart-vim-plugin' "dart
-Plug 'mattn/emmet-vim'
-"Plug 'neovim/nvim-lspconfig'
-"Plug 'kabouzeid/nvim-lspinstall'
-"Plug 'glepnir/lspsaga.nvim'
-"Plug 'hrsh7th/nvim-compe'
+"Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
+
+""""programming
+Plug 'trishume/syntect' "Rust
+Plug 'mattn/emmet-vim' 
+
+
+""""LSP
+Plug 'neovim/nvim-lspconfig' "LSP
+Plug 'glepnir/lspsaga.nvim' "LSP features UI
+Plug 'kabouzeid/nvim-lspinstall' "LSP install
+Plug 'nvim-lua/completion-nvim' "autocompletion
 "Plug 'nvim-treesitter/nvim-treesitter', 
 "Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
+""""flutter tools
+Plug 'akinsho/flutter-tools.nvim'
+Plug 'nvim-lua/plenary.nvim' "dependency of flutter-tools
 
 "Plug 'natebosch/vim-lsc' 
 "Plug 'natebosch/vim-lsc-dart'
 
-"colorschemes"
+""""colorschemes"
 Plug 'pgavlin/pulumi.vim'
 Plug 'dylanaraps/wal.vim'
 Plug 'ulwlu/elly.vim'
@@ -51,12 +59,10 @@ Plug 'zefei/simple-dark'
 call plug#end()
 
 let mapleader = " " 
-if &filetype != "dart"
-    source /home/buddha/.config/nvim/plugconfigs/coc.vim
-endif
-"source /home/buddha/.config/nvim/plugconfigs/pylint.vim
 source /home/buddha/.config/nvim/plugconfigs/fzf.vim
 source /home/buddha/.config/nvim/plugconfigs/colors.vim
+source /home/buddha/.config/nvim/plugconfigs/startify.vim
+source /home/buddha/.config/nvim/plugconfigs/lsp.vim
 
 
 "set ignorecase case insensitive search"
@@ -90,68 +96,58 @@ set hidden  "hide buffer instead of prompting to save
 set shortmess-=F  "for suppressing error messages by lsp
 
 
-let g:startify_session_dir = '~/.config/nvim/session'
-let g:startify_lists = [
-          \ { 'type': 'files',     'header': ['   Files']            },
-          \ { 'type': 'sessions',  'header': ['   Sessions']       },
-          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-          \ ]
-let g:startify_bookmarks = [
-            \ { 'i': '~/.config/nvim/init.vim' },
-            \ { 'z': '~/.zshrc' },
-            \ { 'b': '~/.config/bspwm/bspwmrc' },
-            \ { 'p': '~/.config/polybar/config' },
-            \ { 's': '~/.config/sxhkd/sxhkdrc' },
-            \ { 'k': '~/.config/kitty/kitty.conf' },
-            \ { 'dj': '~/Code/project/odyssey/odyssey_django/' },
-            \ '~/Code',
-            \ '/opt/miscellaneous',
-            \ ]
-let g:startify_custom_header =
-      \ 'startify#center(startify#fortune#cowsay())'
+"Go to the matching tag html
+nnoremap <leader>% :MtaJumpToOtherTag<CR> 
+vnoremap <leader>% :MtaJumpToOtherTag<CR> 
 
-let s:footer = [
-      \ '                      / /    ___ | |_ ( ) ___  | |_ | |__  (_) _ __  | | __  ',
-      \ '                     / /    / _ \| __||/ / __| | __|| |_ \ | || |_ \ | |/ /  ',
-      \ '                    / /___ |  __/| |_    \__ \ | |_ | | | || || | | ||   <   ',
-      \ '                    \____/  \___| \__|   |___/  \__||_| |_||_||_| |_||_|\_\  ',
-      \ '                                                                             ',
-      \ '',
-      \ ]
-
-function! s:center(lines) abort
-  let longest_line   = max(map(copy(a:lines), 'strwidth(v:val)'))
-  let centered_lines = map(copy(a:lines),
-        \ 'repeat(" ", (&columns / 2) - (longest_line / 2)) . v:val')
-  return centered_lines
-endfunction
-
-let g:startify_custom_footer = s:center(s:footer)
-
-let g:user_emmet_leader_key=','
-
-
-"key mappings"
-noremap! <C-BS> <C-w>
+"ctrl+backspace 
+"this is for vim gui
+noremap! <C-BS> <C-w> 
 noremap! <C-h> <C-w>
+
+
+"copy to end of line
+noremap Y y$
+
+"copy to clipboard
 noremap <leader>y "+y
 noremap <leader>p "+p
-cnoremap cc CocCommand<CR>
-noremap <leader>tt :call CocAction('runCommand', 'terminal.Toggle')<CR> 
-map <C-_> <leader>c<leader>
-"map <C-l> :<C-u>FZF<CR>
-map <C-t> :NERDTreeToggle<CR>
-nmap <leader>gd <Plug>(coc-definition)
-nmap <leader>gr <Plug>(coc-references)
 
+" keep it centered
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+"nerd commenter and tree
+map <C-_> <leader>c<leader>
+map <C-t> :NERDTreeToggle<CR>
+
+"resize splits
 noremap <leader>= :vertical resize +5<CR>
 noremap <leader>- :vertical resize -5<CR>
-noremap <C-j> :resize +2<CR>
-noremap <C-k> :resize -2<CR>
+noremap <leader>j :resize +2<CR>
+noremap <leader>k :resize -2<CR>
 
 noremap <C-n> :bn<CR>
 noremap <C-p> :bp<CR>
+
+"change directory 
 cnoremap <C-d> :cd %:p:h<CR>
+
+"open and source vim config
 cnoremap sv source ~/.config/nvim/init.vim<CR>
 cnoremap vc e ~/.config/nvim/init.vim<CR>
+
+" undo break points
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ! !<c-g>u
+inoremap ? ?<c-g>u
+
+"moving text
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+
+
 
