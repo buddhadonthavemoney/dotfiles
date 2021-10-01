@@ -19,11 +19,6 @@ super + Escape
     pkill -USR1 -x sxhkd
 
 #Screenshot
-super + shift + s
-    deepin-screenshot
-
-super + alt + s
-    scrot -s -e 'xclip -selection clipboard -t "image/png" < $f'
 
 super + shift + r
     deepin-screen-recorder
@@ -197,5 +192,6 @@ super + alt + shift + m
 #ctrl + period
     #/opt/miscellaneous/emoji.sh
 
-ctrl + shift + e
-    ~/.local/bin/rofimoji
+#ctrl + shift + e
+    #~/.local/bin/rofimoji
+    

@@ -244,10 +244,10 @@ initial = 2
 
 [module/cryptoPrice]
 type = custom/script
-exec = echo $(/opt/miscellaneous/bitcoin.sh)
+exec = echo $(/opt/miscellaneous/bitcoin.py)
 exec-if = curl google.com 
 click-left = /home/buddha/.local/kitty.app/bin/kitty sh -c "coinmon;/bin/bash"
-interval = 5
+interval = 120
 
 [settings]
 screenchange-reload = true

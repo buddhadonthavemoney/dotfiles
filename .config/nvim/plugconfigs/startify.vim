@@ -11,6 +11,7 @@ let g:startify_bookmarks = [
             \ { 'p': '~/.config/polybar/config' },
             \ { 's': '~/.config/sxhkd/sxhkdrc' },
             \ { 'k': '~/.config/kitty/kitty.conf' },
+            \ { 'r': '~/.config/ranger/rc.conf' },
             \ { 'dj': '~/Code/project/odyssey/odyssey_django/' },
             \ '~/Code',
             \ '/opt/miscellaneous',

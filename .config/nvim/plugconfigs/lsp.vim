@@ -20,8 +20,8 @@ let g:completion_chain_complete_list = [
 " dart 
 lua << EOF
   require("flutter-tools").setup{} -- use defaults
+  require("flutter-config")
 EOF
-source /home/buddha/.config/nvim/plugconfigs/flutter.vim
 
 " Set completeopt to have a better completion experience
 set completeopt=menuone,noinsert,noselect
@@ -42,17 +42,13 @@ vnoremap <silent>ca :<C-U>Lspsaga range_code_action<CR>
 "hover
 nnoremap <silent>K :Lspsaga hover_doc<CR>
 
-"scroll down hover doc or scroll in definition preview
-nnoremap <silent> <C-f> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<CR>
-
-"scroll up hover doc
-nnoremap <silent> <C-b> <cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<CR>
-
 "rename
 nnoremap <silent>gr :Lspsaga rename<CR>
 
-"defination preview
+"goto or preview defination 
 nnoremap <silent> gd :Lspsaga preview_definition<CR>
+nnoremap <silent> <leader>gd <cmd> lua vim.lsp.buf.definition()<CR>
+
 
 "signature help
 nnoremap <silent>gs <cmd>lua require('lspsaga.signaturehelp').signature_help()<CR>

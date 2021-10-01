@@ -103,7 +103,7 @@ function cid(){
 
 echo -ne '\e[5 q'
 eval "$(starship init zsh)"
-source ptSh_set_aliases
+#source ptSh_set_aliases
 
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude .git'

@@ -1,12 +1,12 @@
-set runtimepath^=~/.vim runtimepath+=~/.vim/after
+set runtimepath^=~/.vim 
 let &packpath = &runtimepath
 
 call plug#begin('~/.vim/plugged')
 
 Plug 'junegunn/vim-plug'
 Plug 'rstacruz/sparkup', {'rtp': 'vim/'}    "html code completion"
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
+"Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+"Plug 'junegunn/fzf.vim'
 Plug 'francoiscabrol/ranger.vim'
 Plug 'rbgrouleff/bclose.vim' "dependency to ranger
 Plug 'preservim/nerdcommenter'
@@ -14,6 +14,10 @@ Plug 'mbbill/undotree'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
 Plug 'valloric/MatchTagAlways'
+Plug 'nvim-lua/plenary.nvim' "dependency of flutter-tools and telescope
+Plug 'nvim-telescope/telescope.nvim' 
+Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
 "
 "visual
 Plug 'osyo-manga/vim-brightest' "highlight the word in the cursor
@@ -21,12 +25,14 @@ Plug 'norcalli/nvim-colorizer.lua' "nvim color
 Plug 'itchyny/lightline.vim' "lightline
 Plug 'preservim/nerdtree' "nerdtree
 Plug 'mhinz/vim-startify' "startpage
+Plug 'kyazdani42/nvim-web-devicons'
 
 "Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}}
 
 """"programming
 Plug 'trishume/syntect' "Rust
 Plug 'mattn/emmet-vim' 
+Plug 'dart-lang/dart-vim-plugin' "dart syntax highlight
 
 
 """"LSP
@@ -34,15 +40,10 @@ Plug 'neovim/nvim-lspconfig' "LSP
 Plug 'glepnir/lspsaga.nvim' "LSP features UI
 Plug 'kabouzeid/nvim-lspinstall' "LSP install
 Plug 'nvim-lua/completion-nvim' "autocompletion
-"Plug 'nvim-treesitter/nvim-treesitter', 
-"Plug 'nvim-treesitter/nvim-treesitter-textobjects'
-
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 """"flutter tools
 Plug 'akinsho/flutter-tools.nvim'
-Plug 'nvim-lua/plenary.nvim' "dependency of flutter-tools
-
-"Plug 'natebosch/vim-lsc' 
-"Plug 'natebosch/vim-lsc-dart'
 
 """"colorschemes"
 Plug 'pgavlin/pulumi.vim'
@@ -59,10 +60,11 @@ Plug 'zefei/simple-dark'
 call plug#end()
 
 let mapleader = " " 
-source /home/buddha/.config/nvim/plugconfigs/fzf.vim
+"source /home/buddha/.config/nvim/plugconfigs/fzf.vim
 source /home/buddha/.config/nvim/plugconfigs/colors.vim
 source /home/buddha/.config/nvim/plugconfigs/startify.vim
 source /home/buddha/.config/nvim/plugconfigs/lsp.vim
+source /home/buddha/.config/nvim/plugconfigs/telescope.vim
 
 
 "set ignorecase case insensitive search"
@@ -127,8 +129,8 @@ noremap <leader>- :vertical resize -5<CR>
 noremap <leader>j :resize +2<CR>
 noremap <leader>k :resize -2<CR>
 
-noremap <C-n> :bn<CR>
-noremap <C-p> :bp<CR>
+noremap bn :bn<CR>
+noremap bp :bp<CR>
 
 "change directory 
 cnoremap <C-d> :cd %:p:h<CR>
@@ -148,6 +150,4 @@ vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
-
-
 
