@@ -13,6 +13,7 @@ let g:startify_bookmarks = [
             \ { 'k': '~/.config/kitty/kitty.conf' },
             \ { 'r': '~/.config/ranger/rc.conf' },
             \ { 'dj': '~/Code/project/odyssey/odyssey_django/' },
+            \ { 'n': '~/.notable/notes/School.md'},
             \ '~/Code',
             \ '/opt/miscellaneous',
             \ ]

@@ -8,6 +8,8 @@ export VK_LAYER_PATH=$VULKAN_SDK/etc/vulkan/explicit_layer.d
 
 export EDITOR='nvim'
 export VISUAL='nvim'
+export JUNIT_HOME=/usr/local/JUNIT
+export CLASSPATH=$CLASSPATH:$JUNIT_HOME/junit-4.10.jar
 
 PATH="$HOME/.local/bin:$PATH"
 PATH="/usr/sbin:$PATH"
@@ -18,4 +20,6 @@ PATH="/home/$USER/.local/flutter/bin/:$PATH"
 PATH="/home/$USER/.config/ranger/:$PATH"
 PATH="$PATH:/opt/Postman"
 PATH="$PATH:/usr/local/go/bin:/$HOME/go/bin"
-
+PATH="$PATH":"$HOME/.local/flutter/.pub-cache/bin"
+PATH="/home/buddha/.local/share/solana/install/active_release/bin:$PATH"
+PATH="/home/buddha/Applications/bitcoin/:$PATH"

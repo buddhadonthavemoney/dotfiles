@@ -1,4 +1,5 @@
-#
+
+ngs
 # wm independent hotkeys
 #
 
@@ -9,10 +10,15 @@ super + Return
 
 # rofi launcher
 super + space
-    /home/buddha/.config/rofi/bin/launcher_text
+    rofi -show drun
 
 alt + space
-    /home/buddha/.config/rofi/bin/launcher_switchwindow
+    rofi -show window
+
+super + period
+    /opt/miscellaneous/emoji.sh
+    #rofi -show emoji -modi emoji
+
 
 # make sxhkd reload its configuration files:
 super + Escape
@@ -93,11 +99,11 @@ super + bracket{left,right}
 # focus or send to next/previous desktop
 super + shift + bracketleft
     bspc node -d prev.local; \
-	bspc desktop -f prev.local
+	#bspc desktop -f prev.local
 
 super + shift + bracketright
     bspc node -d next.local; \
-	bspc desktop -f next.local
+	#bspc desktop -f next.local
 
 # focus the last node/desktop
 super + {Tab, grave}
@@ -186,12 +192,17 @@ ctrl + alt + u
 super + alt + i
     /opt/miscellaneous/hide.sh
 
-super + alt + shift + m
+super + alt + shift + u
     /opt/miscellaneous/meroshare.sh
 
 #ctrl + period
     #/opt/miscellaneous/emoji.sh
 
-#ctrl + shift + e
-    #~/.local/bin/rofimoji
+super + alt + c
+    rofi -theme Pop-Dark -show calc -modi calc -width 40 -no-show-match -no-sort 
     
+super + alt + d
+  terminator -e sdcv
+    
+super + alt + t
+  terminator 

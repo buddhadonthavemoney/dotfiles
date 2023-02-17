@@ -21,7 +21,6 @@ zstyle ':completion:*' menu select
 compinit
 DISABLE_UNTRACKED_FILES_DIRTY="true"
 
-
 #linuxlogo -a -l | toilet --metal -f term | lolcat
 array=( green yellow cyan white magenta )
 /home/buddha/Clones/fm6000 -de BSPWM -r -c ${array[$(($RANDOM%5+1))]}
@@ -99,6 +98,39 @@ function cid(){
     cat "$filename" | grep "\"id\"\:" --color;
     sed -i -e 's/"id":[0-9]\+/"id":'"$1"'/g' "$filename";
     cat "$filename" | grep "\"id\"\:" --color;
+}
+
+function countdown () {
+	start="$(( $(date '+%s') + $1))" 
+	while [ $start -ge $(date +%s) ]
+	do
+		time="$(( $start - $(date +%s) ))" 
+		printf '%s \033[2j\033[0m' "$(date -u -d "@$time" +%H:%M:%S)" | figlet 
+		sleep 0.1
+    clear
+		printf '%s \033[2j\033[0m' "$(date -u -d "@$time" +%H:%M:%S)" | figlet 
+	done
+	for i in {1..7}
+	do
+		espeak "timer done"
+	done
+}
+
+function stopwatch() {
+    local BEGIN=$(date +%s)
+    echo Starting Stopwatch...
+
+    while true; do
+        local NOW=$(date +%s)
+        local DIFF=$(($NOW - $BEGIN))
+        local MINS=$(($DIFF / 60))
+        local SECS=$(($DIFF % 60))
+        local HOURS=$(($DIFF / 3600))
+        local DAYS=$(($DIFF / 86400))
+
+        printf "\r:%02d:%02d:%02d" $HOURS $MINS $SECS | figlet | lolcat
+        sleep 0.5
+    done
 }
 
 echo -ne '\e[5 q'
