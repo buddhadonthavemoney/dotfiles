@@ -149,7 +149,7 @@ nnoremap n nzzzv
 nnoremap N Nzzzv
 
 "nerd commenter and tree
-map <C-_> <leader>c<leader>
+map <C-/> <leader>c<leader>
 map <C-t> :NERDTreeToggle<CR>
 
 "resize splits
