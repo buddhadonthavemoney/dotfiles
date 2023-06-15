@@ -1,0 +1,1 @@
+-- require('dap-python').setup('~/Environments/debugpy/bin/python')

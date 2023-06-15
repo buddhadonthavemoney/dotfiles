@@ -1,0 +1,116 @@
+# ~/.config/starship.toml
+
+
+# Don't print a new line at the start of the prompt
+add_newline = true
+
+#format = """
+#[┌───────────────────>](bold green)
+#[│](bold green)($directory)$rust$python$package$env_var$battery
+#[└─>](bold green) """
+
+
+format = """
+$username\
+$hostname\
+$shlvl\
+$kubernetes\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_status\
+$hg_branch\
+$docker_context\
+$package\
+$cmake\
+$dart\
+$dotnet\
+$elixir\
+$elm\
+$erlang\
+$golang\
+$helm\
+$java\
+$julia\
+$nim\
+$nodejs\
+$ocaml\
+$perl\
+$python\
+$lua\
+$php\
+$purescript\
+$ruby\
+$rust\
+$swift\
+$terraform\
+$zig\
+$nix_shell\
+$conda\
+$memory_usage\
+$gcloud\
+$openstack\
+$env_var\
+$crystal\
+$custom\
+$cmd_duration\
+$battery\
+$line_break\
+$time\
+$status\
+$character\
+$jobs"""
+
+
+[directory]
+format = "[┌─\\(](bold white)[$path]($style)[\\)](bold white)[$read_only ]($read_only_style)"
+
+
+[character]
+format = "[└](bold white)$symbol "
+error_symbol = "[X](bold red)"
+
+
+[battery]
+full_symbol = "🔋"
+charging_symbol = "⚡️"
+discharging_symbol = "🔌"
+disable = false
+
+[[battery.display]]
+threshold = 20
+style = "bold red"
+
+[[battery.display]]
+threshold = 30
+style = "bold yellow"
+
+[[battery.display]]
+threshold = 100
+style = "bold blue"
+
+[[battery.display]]
+threshold = 20
+style = "bold red"
+
+
+
+[python]
+format = '[${symbol}(\($virtualenv\))]($style) '
+symbol = "🐍 "
+
+
+[elm]
+disabled = true
+
+
+[package]
+format = "via [🎁 $version](208 bold) "
+
+
+[nodejs]
+disabled = true
+
+
+

@@ -1,0 +1,208 @@
+
+ngs
+# wm independent hotkeys
+#
+
+# terminal emulator
+super + Return
+    /home/buddha/.local/kitty.app/bin/kitty
+
+
+# rofi launcher
+super + space
+    rofi -show drun
+
+alt + space
+    rofi -show window
+
+super + period
+    /opt/miscellaneous/emoji.sh
+    #rofi -show emoji -modi emoji
+
+
+# make sxhkd reload its configuration files:
+super + Escape
+    pkill -USR1 -x sxhkd
+
+#Screenshot
+
+super + shift + r
+    deepin-screen-recorder
+#
+# bspwm hotkeys
+#
+
+
+#super + button{1-3}
+#    bspc pointer -g {move,resize_side,resize_corner}
+#
+#super + !button{1-3}
+#    bspc pointer -t %i, %i
+#
+#super + @button{1-3}
+#    bspc pointer -u
+
+
+# quit/restart bspwm
+super + alt + {q,r}
+    bspc {quit,wm -r}
+
+# close and kill
+super + {_,shift + }q
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+super + m
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+super + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest node
+super + g
+	bspc node -s biggest
+
+#
+# state/flags
+#
+
+# set the window state
+super + {t,shift + t,s,f}
+	bspc node -t {tiled,pseudo_tiled,floating,fullscreen}
+
+# set the node flags
+super + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+super + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# focus the node for the given path jump
+super + {p,b,comma,period}
+	bspc node -f @{parent,brother,first,second}
+
+# focus the next/previous node in the current desktop
+#super + {_,shift + } Tab
+	#bspc node -f {next,prev}.local
+
+# focus the next/previous desktop in the current monitor
+super + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+	bspc node -f {next,prev}.local
+    
+# focus or send to next/previous desktop
+super + shift + bracketleft
+    bspc node -d prev.local; \
+	#bspc desktop -f prev.local
+
+super + shift + bracketright
+    bspc node -d next.local; \
+	#bspc desktop -f next.local
+
+# focus the last node/desktop
+super + {Tab, grave}
+	bspc {node,desktop} -f last
+
+# focus the older or newer node in the focus history
+super + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+super + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+#
+# preselect
+#
+
+# preselect the direction
+super + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+super + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+super + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+super + ctrl + shift + space
+#
+# move/resize
+#
+
+super + shift + plus 
+    bspc config window_gap $(($(bspc config window_gap)+10))
+
+super + shift + minus    
+    bspc config window_gap $(($(bspc config window_gap)-10))
+
+# expand a window by moving one of its side outward
+super + alt + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+super + alt + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+super + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+#Keyboard Layouts
+
+#Volume Control
+XF86AudioLowerVolume
+    pactl list | grep -oP 'Sink #\K([0-9]+)' | while read -r i ; \
+    do pactl -- set-sink-volume $i -5% ; done
+	#amixer set Master 5%-
+XF86AudioRaiseVolume
+    pactl list | grep -oP 'Sink #\K([0-9]+)' | while read -r i ; \
+    do pactl -- set-sink-volume $i +5% ; done
+	#amixer set Master 5%+
+XF86AudioMute
+        amixer set Master toggle
+
+#Brightness control
+XF86MonBrightnessDown
+	xbacklight -dec 5
+XF86MonBrightnessUp
+	xbacklight -inc 5
+
+
+#xdo command
+ctrl + alt + h
+    xdo hide
+
+ctrl + alt + u
+    xdo show -dr
+
+#custom commands
+    
+super + alt + i
+    /opt/miscellaneous/hide.sh
+
+super + alt + shift + u
+    /opt/miscellaneous/meroshare.sh
+
+#ctrl + period
+    #/opt/miscellaneous/emoji.sh
+
+super + alt + c
+    rofi -theme Pop-Dark -show calc -modi calc -width 40 -no-show-match -no-sort 
+    
+super + alt + d
+  terminator -e sdcv
+    
+super + alt + t
+  terminator 
