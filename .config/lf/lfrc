@@ -142,3 +142,5 @@ map . ${{
     QL_FILE=$(wslpath -w $f)
     powershell.exe "$QL_EXE $QL_FILE"
 }}
+
+map , set hidden!
