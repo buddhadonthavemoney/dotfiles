@@ -189,6 +189,12 @@ ctrl + alt + u
 
 #custom commands
     
+ctrl + alt + k
+    /home/buddha/Applications/gnirehtet-rust-linux64/gnirehtet start
+
+ctrl + alt + l
+    /home/buddha/Applications/gnirehtet-rust-linux64/gnirehtet stop
+
 super + alt + i
     /opt/miscellaneous/hide.sh
 
@@ -206,3 +212,4 @@ super + alt + d
     
 super + alt + t
   terminator 
+
