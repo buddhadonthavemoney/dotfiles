@@ -11,23 +11,29 @@ pkill kdeconnect
 pkill polybar
 pkill nm-applet
 pkill xfce4-clipman
-pkill redshift
-pkill redshift
 
+pkill redshift
+pkill redshift
+# pkill discord
+
+## GO bin
 PATH="$PATH:/usr/local/go/bin"
+
 ##autostart
-$HOME/.config/polybar/launch.sh
+#Polybar
+$HOME/.config/polybar/colorblocks/scripts/pywal.sh $(cat .fehbg | grep -oE "'.*'")
+$HOME/.config/polybar/colorblocks/launch.sh
 
 $HOME/Clones/picom/build/src/picom & 
 ~/.fehbg &
 dunst &
 xfce4-clipman &
-kdeconnect-indicator &
 nm-applet &
 sxhkd &
+# discord &
 #/opt/miscellaneous/floating.sh &
 /opt/miscellaneous/drive_sync.sh &
-#. "${HOME}/.cache/wal/colors.sh"
+# ./"${HOME}/.cache/wal/colors.sh"
 
 #bspwm
 
@@ -47,9 +53,7 @@ bspc rule -a ViberPC desktop='^6' follow=on
 bspc rule -a M2011K2G state=floating follow=on
 bspc rule -a Google-chrome desktop='^7' follow=on
 bspc rule -a Firefox-esr desktop='^1' follow=on
-bspc rule -a Notable desktop='^8' follow=on
 bspc rule -a scrcpy state=floating follow=no
-bspc rule -a Spotify desktop='^9' follow=yes
 bspc rule -a Terminator state=floating
 
 #bspc config focused_border_color "123" 
