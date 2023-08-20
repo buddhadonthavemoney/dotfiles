@@ -5,14 +5,18 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
     -- Packer can manage itself
-    use{
-        'dylanaraps/wal.vim',
-        config = function()
-            vim.cmd('colorscheme wal')
-        end
-    }
-    use('barrett-ruth/live-server.nvim')
-    use ('norcalli/nvim-colorizer.lua')
+    -- use{
+    --     'dylanaraps/wal.vim',
+    --     config = function()
+    --         vim.cmd('colorscheme wal')
+    --     end
+    -- }
+
+    -- use { 'mhartington/formatter.nvim' }
+    use "nvim-tree/nvim-tree.lua"
+    use "lukas-reineke/indent-blankline.nvim"
+    use 'windwp/nvim-ts-autotag'
+    use('norcalli/nvim-colorizer.lua')
     use('github/copilot.vim')
     use('wbthomason/packer.nvim')
     use 'francoiscabrol/ranger.vim'
@@ -32,8 +36,18 @@ return require('packer').startup(function(use)
         'nvim-telescope/telescope.nvim', tag = '0.1.1',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
+    use {
+        "nvim-telescope/telescope-file-browser.nvim",
+        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+    }
 
-    use 'terrortylor/nvim-comment'
+    -- use 'terrortylor/nvim-comment'
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
 
     use {
         "olimorris/onedarkpro.nvim",
@@ -52,6 +66,7 @@ return require('packer').startup(function(use)
 
     use {
         'nvim-treesitter/nvim-treesitter',
+        requires = { 'JoosepAlviste/nvim-ts-context-commentstring' },
         run = function()
             local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
             ts_update()
@@ -69,12 +84,14 @@ return require('packer').startup(function(use)
             { 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
             -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },         -- Required
-            { 'hrsh7th/cmp-nvim-lsp' },     -- Required
-            { 'hrsh7th/cmp-buffer' },       -- Optional
-            { 'hrsh7th/cmp-path' },         -- Optional
-            { 'saadparwaiz1/cmp_luasnip' }, -- Optional
-            { 'hrsh7th/cmp-nvim-lua' },     -- Optional
+            { 'hrsh7th/nvim-cmp' },                -- Required
+            { 'hrsh7th/cmp-nvim-lsp' },            -- Required
+            { 'hrsh7th/cmp-buffer' },              -- Optional
+            { 'hrsh7th/cmp-path' },                -- Optional
+            { 'saadparwaiz1/cmp_luasnip' },        -- Optional
+            { 'hrsh7th/cmp-nvim-lua' },            -- Optional
+            { 'jose-elias-alvarez/null-ls.nvim' }, -- Optional
+            { 'jay-babu/mason-null-ls.nvim' },     -- Optional
 
             -- Snippets
             { 'L3MON4D3/LuaSnip' },             -- Required
