@@ -7,6 +7,7 @@ source $HOME/.config/zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.config/zsh/vi-mode.zsh
 source $HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.config/zsh/aliases.zsh
+export FLYCTL_INSTALL="/home/buddha/.fly"
 source $HOME/.config/zsh/env_variables.zsh
 
 ZSH_AUTOSUGGEST_USE_ASYNC=1 
@@ -158,4 +159,5 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
-(cat ~/.cache/wal/sequences &)
+# (cat ~/.cache/wal/sequences &)
+export PATH="$FLYCTL_INSTALL/bin:$PATH"

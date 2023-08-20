@@ -5,6 +5,21 @@ local lsp = require('lsp-zero').preset({
     suggest_lsp_servers = false,
 })
 
+require("mason").setup()
+require("mason-lspconfig").setup {
+    ensure_installed = {
+        "lua_ls",
+        'tsserver',
+        'eslint',
+        'html',
+        'pylsp',
+    },
+}
+require("mason-null-ls").setup({
+    handlers = {},
+})
+
+
 lsp.format_on_save({
     servers = {
         ['lua_ls'] = { 'lua' },
@@ -13,6 +28,8 @@ lsp.format_on_save({
         -- ['py_lsp'] = { 'py' },
         ['markdown_lint'] = { 'md' },
         ['omnisharp'] = { 'cs', 'vb' },
+        ['html'] = { 'html', 'css' },
+        ['tsserver'] = { 'ts', 'js', 'javascript', 'typescript' }
     }
 })
 
@@ -28,7 +45,7 @@ lsp.on_attach(function(client, bufnr)
     vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
-    vim.keymap.set("n", "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
+    vim.keymap.set({ "n", "v" }, "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
     vim.keymap.set("n", "<leader>r", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<F2>", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
