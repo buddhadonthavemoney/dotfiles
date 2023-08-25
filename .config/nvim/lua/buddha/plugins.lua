@@ -13,6 +13,7 @@ return require('packer').startup(function(use)
     -- }
 
     -- use { 'mhartington/formatter.nvim' }
+    use { "christoomey/vim-tmux-navigator" }
     use "nvim-tree/nvim-tree.lua"
     use "lukas-reineke/indent-blankline.nvim"
     use 'windwp/nvim-ts-autotag'

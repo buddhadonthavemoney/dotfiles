@@ -15,9 +15,9 @@ require("mason-lspconfig").setup {
         'pylsp',
     },
 }
-require("mason-null-ls").setup({
-    handlers = {},
-})
+-- require("mason-null-ls").setup({
+--     handlers = {},
+-- })
 
 
 lsp.format_on_save({
