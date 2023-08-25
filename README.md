@@ -14,7 +14,6 @@ configuration files to my linux applications.
   - Startify for the start window
   - Telescope for files and buffer management
   - Coloscheme - one-dark
-  -
  
 - Notification - Dunst
 - Launcher - Rofi
