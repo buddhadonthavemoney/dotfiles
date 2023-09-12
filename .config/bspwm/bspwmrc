@@ -14,10 +14,12 @@ pkill xfce4-clipman
 
 pkill redshift
 pkill redshift
+pkill Obsidian
 # pkill discord
 
 ## GO bin
 PATH="$PATH:/usr/local/go/bin"
+
 
 ##autostart
 #Polybar
@@ -32,7 +34,7 @@ nm-applet &
 sxhkd &
 # discord &
 #/opt/miscellaneous/floating.sh &
-/opt/miscellaneous/drive_sync.sh &
+# /opt/miscellaneous/drive_sync.sh >> /tmp/.drive_sync.log & 
 # ./"${HOME}/.cache/wal/colors.sh"
 
 #bspwm
