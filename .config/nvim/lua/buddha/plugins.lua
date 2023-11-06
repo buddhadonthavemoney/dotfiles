@@ -5,19 +5,21 @@ vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
     -- Packer can manage itself
-    -- use{
-    --     'dylanaraps/wal.vim',
-    --     config = function()
-    --         vim.cmd('colorscheme wal')
-    --     end
-    -- }
-
     -- use { 'mhartington/formatter.nvim' }
+    --
+    use { 'tpope/vim-fugitive' }
+    use {
+        "nvimdev/guard.nvim",
+        -- Builtin configuration, optional
+        requires = {
+            "nvimdev/guard-collection",
+        },
+    }
     use { "christoomey/vim-tmux-navigator" }
     use "nvim-tree/nvim-tree.lua"
-    use "lukas-reineke/indent-blankline.nvim"
+    -- use "lukas-reineke/indent-blankline.nvim"
     use 'windwp/nvim-ts-autotag'
-    use('norcalli/nvim-colorizer.lua')
+    -- use('norcalli/nvim-colorizer.lua')
     use('github/copilot.vim')
     use('wbthomason/packer.nvim')
     use 'francoiscabrol/ranger.vim'
@@ -25,11 +27,14 @@ return require('packer').startup(function(use)
         requires = { 'kyazdani42/nvim-web-devicons', opt = true }
     }
     use('mbbill/undotree')
+    use 'voldikss/vim-floaterm'
+    use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+        require("toggleterm").setup()
+    end }
     -- use {
     --     'itchyny/lightline.vim',
     -- }
-    use 'ThePrimeagen/vim-be-good'
-
+    use "lpoto/telescope-docker.nvim"
     use 'mhinz/vim-startify'
     -- use 'vim-airline/vim-airline'
 
@@ -39,7 +44,11 @@ return require('packer').startup(function(use)
     }
     use {
         "nvim-telescope/telescope-file-browser.nvim",
-        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
+        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim",
+            "nvim-telescope/telescope-live-grep-args.nvim" },
+        config = function()
+            require("telescope").load_extension("live_grep_args")
+        end
     }
 
     -- use 'terrortylor/nvim-comment'
@@ -52,10 +61,6 @@ return require('packer').startup(function(use)
 
     use {
         "olimorris/onedarkpro.nvim",
-        as = 'onedark-vivid',
-        -- config = function()
-        --     vim.cmd('colorscheme onedark_vivid')
-        -- end
     }
     -- install without yarn or npm
     use({

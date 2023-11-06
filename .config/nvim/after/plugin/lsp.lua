@@ -14,10 +14,22 @@ require("mason-lspconfig").setup {
         'html',
         'pylsp',
     },
+    settings = {
+        pylsp = {
+            pylsp = {
+                plugins = {
+                    -- pycodestyle = {
+                    --     ignore = { "W191, W391" },
+                    --     maxLineLength = 160,
+                    --     statistics = true,
+                    -- },
+                    flake8 = { enabled = true },
+                    pyls_black = { enabled = true }
+                }
+            }
+        }
+    }
 }
--- require("mason-null-ls").setup({
---     handlers = {},
--- })
 
 
 lsp.format_on_save({
