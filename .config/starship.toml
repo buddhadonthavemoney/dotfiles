@@ -76,7 +76,7 @@ error_symbol = "[X](bold red)"
 full_symbol = "🔋"
 charging_symbol = "⚡️"
 discharging_symbol = "🔌"
-disable = false
+disabled = false
 
 [[battery.display]]
 threshold = 20

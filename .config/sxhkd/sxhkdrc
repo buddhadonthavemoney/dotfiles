@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-    /home/buddha/.local/kitty.app/bin/kitty
+   /bin/kitty 
 
 
 # rofi launcher
@@ -79,8 +79,8 @@ super + ctrl + {m,x,y,z}
 #
 
 # focus the node in the given direction
-super + {_,shift + }{h,j,k,l}
-	bspc node -{f,s} {west,south,north,east}
+super + {_,shift + }{h,l}
+	bspc node -{f,s} {west,east}
 
 # focus the node for the given path jump
 super + {p,b,comma,period}
@@ -93,8 +93,10 @@ super + {p,b,comma,period}
 # focus the next/previous desktop in the current monitor
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
-	bspc node -f {next,prev}.local
     
+super + alt + {comma,period}
+	bspc node -f {next,prev}.local
+#
 # focus or send to next/previous desktop
 super + shift + bracketleft
     bspc node -d prev.local; \
@@ -107,6 +109,7 @@ super + shift + bracketright
 # focus the last node/desktop
 super + {Tab, grave}
 	bspc {node,desktop} -f last
+
 
 # focus the older or newer node in the focus history
 super + {o,i}
@@ -157,6 +160,10 @@ super + alt + shift + {h,j,k,l}
 # move a floating window
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+super + {j,k} 
+    bspc node -f {prev,next}.local
+
 
 #Keyboard Layouts
 

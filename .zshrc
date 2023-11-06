@@ -136,4 +136,3 @@ function stopwatch() {
 echo -ne '\e[5 q'
 eval "$(starship init zsh)"
 source $HOME/.config/zsh/additional-config.zsh
-
