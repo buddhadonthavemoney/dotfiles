@@ -1,5 +1,4 @@
 echo -ne '\e[5 q'
-eval "$(starship init zsh)"
 # source $HOME/.config/zsh/additional-config.zsh
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border'
 export FZF_DEFAULT_COMMAND='fdfind --type f --hidden --follow --exclude .git'
@@ -22,3 +21,6 @@ _fzf_compgen_dir() {
   fd --type d --hidden --follow --exclude ".git" . "$1"
 }
 
+
+export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"

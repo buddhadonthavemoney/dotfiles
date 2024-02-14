@@ -1,5 +1,5 @@
 #! /bin/sh
-#setxkbmap -option caps:escape
+setxkbmap -option caps:escape
 
 $HOME/.config/bspwm/monitor.sh >> /tmp/monitor.log & 
 

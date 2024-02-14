@@ -4,104 +4,108 @@
 vim.cmd [[packadd packer.nvim]]
 
 return require('packer').startup(function(use)
-    -- Packer can manage itself
-    -- use { 'mhartington/formatter.nvim' }
-    --
-    use { 'tpope/vim-fugitive' }
-    use {
-        "nvimdev/guard.nvim",
-        -- Builtin configuration, optional
-        requires = {
-            "nvimdev/guard-collection",
-        },
-    }
-    use { "christoomey/vim-tmux-navigator" }
-    use "nvim-tree/nvim-tree.lua"
-    -- use "lukas-reineke/indent-blankline.nvim"
-    use 'windwp/nvim-ts-autotag'
-    -- use('norcalli/nvim-colorizer.lua')
-    use('github/copilot.vim')
-    use('wbthomason/packer.nvim')
-    use 'francoiscabrol/ranger.vim'
-    use { 'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
-    }
-    use('mbbill/undotree')
-    use 'voldikss/vim-floaterm'
-    use { "akinsho/toggleterm.nvim", tag = '*', config = function()
-        require("toggleterm").setup()
-    end }
-    -- use {
-    --     'itchyny/lightline.vim',
-    -- }
-    use "lpoto/telescope-docker.nvim"
-    use 'mhinz/vim-startify'
-    -- use 'vim-airline/vim-airline'
+	use('wbthomason/packer.nvim')
 
-    use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
-        requires = { { 'nvim-lua/plenary.nvim' } }
-    }
-    use {
-        "nvim-telescope/telescope-file-browser.nvim",
-        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim",
-            "nvim-telescope/telescope-live-grep-args.nvim" },
-        config = function()
-            require("telescope").load_extension("live_grep_args")
-        end
-    }
+	------------ COLORSCHEME ------------
+	use {
+		"olimorris/onedarkpro.nvim",
+	}
 
-    -- use 'terrortylor/nvim-comment'
-    use {
-        'numToStr/Comment.nvim',
-        config = function()
-            require('Comment').setup()
-        end
-    }
+	------------ NAVIGATION ------------
+	use "nvim-tree/nvim-tree.lua"
+	use ('ggandor/leap.nvim')
+	use('mbbill/undotree')
 
-    use {
-        "olimorris/onedarkpro.nvim",
-    }
-    -- install without yarn or npm
-    use({
-        "iamcco/markdown-preview.nvim",
-        run = function() vim.fn["mkdp#util#install"]() end,
-    })
+	----------- TELESCOPE ------------
+	use {
+		'nvim-telescope/telescope.nvim', tag = '0.1.4',
+		requires = { { 'nvim-lua/plenary.nvim' } }
+	}
+	use {
+		"nvim-telescope/telescope-file-browser.nvim",
+		requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim",
+			"nvim-telescope/telescope-live-grep-args.nvim" },
+		config = function()
+			require("telescope").load_extension("live_grep_args")
+		end
+	}
 
-    -- use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
+	------------ DEVELOPMENT ------------
+	use 'voldikss/vim-floaterm'
+	use { "akinsho/toggleterm.nvim", tag = '*', config = function()
+		require("toggleterm").setup()
+	end }
+	use 'terrortylor/nvim-comment'
+	use {
+		'numToStr/Comment.nvim',
+		config = function()
+			require('Comment').setup()
+		end
+	}
+	------------ VISUALS ------------
+	use 'mhinz/vim-startify'
+	use { 'nvim-lualine/lualine.nvim',
+		requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+	}
+	use {
+		'nvim-treesitter/nvim-treesitter',
+		requires = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+		run = function()
+			local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
+			ts_update()
+		end,
 
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        requires = { 'JoosepAlviste/nvim-ts-context-commentstring' },
-        run = function()
-            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-            ts_update()
-        end,
+	}
 
-    }
+	------------ GIT ------------
+	use {'f-person/git-blame.nvim' }
+	use { 'tpope/vim-fugitive' }
 
-    use {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v1.x',
-        requires = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },             -- Required
-            { 'williamboman/mason.nvim' },           -- Optional
-            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+	------------ LSP ------------  
+	use {'github/copilot.vim' }
+	use {
+		'VonHeikemen/lsp-zero.nvim',
+		branch = 'v3.x',
+		requires = {
+			-- LSP Support
+			{ 'neovim/nvim-lspconfig' },    -- Required
+			{ 'williamboman/mason.nvim' },  -- Optional
+			{ 'williamboman/mason-lspconfig.nvim' }, -- Optional
 
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },                -- Required
-            { 'hrsh7th/cmp-nvim-lsp' },            -- Required
-            { 'hrsh7th/cmp-buffer' },              -- Optional
-            { 'hrsh7th/cmp-path' },                -- Optional
-            { 'saadparwaiz1/cmp_luasnip' },        -- Optional
-            { 'hrsh7th/cmp-nvim-lua' },            -- Optional
-            { 'jose-elias-alvarez/null-ls.nvim' }, -- Optional
-            { 'jay-babu/mason-null-ls.nvim' },     -- Optional
+			-- Autocompletion
+			{ 'hrsh7th/nvim-cmp' },       -- Required
+			{ 'hrsh7th/cmp-nvim-lsp' },   -- Required
+			{ 'hrsh7th/cmp-buffer' },     -- Optional
+			{ 'hrsh7th/cmp-path' },       -- Optional
+			{ 'saadparwaiz1/cmp_luasnip' }, -- Optional
+			{ 'hrsh7th/cmp-nvim-lua' },   -- Optional
+			{ 'jose-elias-alvarez/null-ls.nvim' }, -- Optional
+			{ 'jay-babu/mason-null-ls.nvim' }, -- Optional
 
-            -- Snippets
-            { 'L3MON4D3/LuaSnip' },             -- Required
-            { 'rafamadriz/friendly-snippets' }, -- Optional
-        }
-    }
+			-- Snippets
+			{ 'L3MON4D3/LuaSnip' },    -- Required
+			{ 'rafamadriz/friendly-snippets' }, -- Optional
+		}
+	}
+	-- dap autocomplete
+	use {'rcarriga/cmp-dap' }
+
+	------------ FORMATTER ------------
+	use {
+		"nvimdev/guard.nvim",
+		requires = {
+			"nvimdev/guard-collection",
+		},
+	}
+
+
+	------------ DEBUGGER & TESTS ------------
+	use { 'mfussenegger/nvim-dap' }
+	use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+	use { 'mfussenegger/nvim-dap-python' }
+	use { 'leoluz/nvim-dap-go' }
+
+	------------ TMUX ------------
+	use { "christoomey/vim-tmux-navigator" }
+
 end)

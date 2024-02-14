@@ -1,12 +1,14 @@
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
-vim.keymap.set("v", "<leader>y", "\"+y")          -- copy to global clipboard
-vim.keymap.set("n", "<leader>y", "\"+y")          -- copy to global clipboard
-vim.keymap.set({ "n", "v" }, "<leader>p", "\"+p") -- paste from global clipboard
+vim.keymap.set("v", "<leader>y", "\"+y")                                             -- copy to global clipboard
+vim.keymap.set("v", "<leader><leader>y", ":call system('nc -N localhost 8377')<CR>") -- copy to clipper clipboard
 
-vim.keymap.set("n", "bn", ":bn<CR>")              -- buffernext
-vim.keymap.set("n", "bp", ":bp<CR>")              -- bufferprevious
-vim.keymap.set("n", "bd", ":bp<CR>:bd#<CR>")      -- bufferprevious
+vim.keymap.set("n", "<leader>y", "\"+y")                                             -- copy to global clipboard
+vim.keymap.set({ "n", "v" }, "<leader>p", "\"+p")                                    -- paste from global clipboard
+
+vim.keymap.set("n", "bn", ":bn<CR>")                                                 -- buffernext
+vim.keymap.set("n", "bp", ":bp<CR>")                                                 -- bufferprevious
+vim.keymap.set("n", "bd", ":bp<CR>:bd#<CR>")                                         -- bufferprevious
 
 vim.keymap.set("n", "cd", ":cd %:p:h<CR>")
 
@@ -24,3 +26,4 @@ vim.keymap.set("i", "<C-BS>", "<C-W>")
 vim.keymap.set("n", "<leader>mp", ":MarkdownPreview<CR>")
 
 vim.keymap.set("c", "sv", "source /home/buddha/.config/nvim/init.lua<CR>")
+vim.keymap.set("n", "<leader>e", ":set noexpandtab<CR>:%retab!<CR>")

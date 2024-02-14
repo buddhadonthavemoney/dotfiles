@@ -13,18 +13,26 @@ if &shortmess =~ 'A'
 else
   set shortmess=aoO
 endif
-badd +1 manage.py
-badd +248 cooperative/specs/external_apis/mofin_specs.py
-badd +63 cooperative/external_apis/mofin.py
-badd +32 cooperative/helpers.py
-badd +14 helpers/requests.py
-badd +64 autho/specs/recipes.py
+badd +22 thirdparty/apis/silkroad.py
+badd +6 thirdparty/specs/apis/test_silkroad.py
+badd +17 thirdparty/specs/apis/recipe.py
+badd +233 permission/helpers/permission_maps/__init__.py
+badd +52 term://~/Work/MinionEZSetup/MINION//25350:ranger\ --choosefiles=/tmp/chosenfile\ --selectfile=\"/home/buddha/Work/MinionEZSetup/MINION/thirdparty/specs/apis/test_silkroad.py\"
+badd +110 thirdparty/helpers/silkroad.py
 argglobal
 %argdel
-edit cooperative/helpers.py
+edit thirdparty/helpers/silkroad.py
 let s:save_splitbelow = &splitbelow
 let s:save_splitright = &splitright
 set splitbelow splitright
+wincmd _ | wincmd |
+split
+1wincmd k
+wincmd _ | wincmd |
+vsplit
+1wincmd h
+wincmd w
+wincmd w
 wincmd _ | wincmd |
 vsplit
 1wincmd h
@@ -38,10 +46,29 @@ set winminheight=0
 set winheight=1
 set winminwidth=0
 set winwidth=1
-exe 'vert 1resize ' . ((&columns * 93 + 94) / 188)
-exe 'vert 2resize ' . ((&columns * 94 + 94) / 188)
+exe '1resize ' . ((&lines * 37 + 27) / 55)
+exe 'vert 1resize ' . ((&columns * 30 + 95) / 191)
+exe '2resize ' . ((&lines * 37 + 27) / 55)
+exe 'vert 2resize ' . ((&columns * 160 + 95) / 191)
+exe '3resize ' . ((&lines * 15 + 27) / 55)
+exe 'vert 3resize ' . ((&columns * 95 + 95) / 191)
+exe '4resize ' . ((&lines * 15 + 27) / 55)
+exe 'vert 4resize ' . ((&columns * 95 + 95) / 191)
 argglobal
-balt cooperative/external_apis/mofin.py
+enew
+file NvimTree_1
+balt thirdparty/specs/apis/test_silkroad.py
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal nofen
+wincmd w
+argglobal
+balt permission/helpers/permission_maps/__init__.py
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -52,19 +79,19 @@ setlocal fdn=20
 setlocal fen
 silent! normal! zE
 let &fdl = &fdl
-let s:l = 44 - ((30 * winheight(0) + 21) / 42)
+let s:l = 112 - ((25 * winheight(0) + 18) / 36)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 44
+keepjumps 112
 normal! 016|
 wincmd w
 argglobal
-if bufexists(fnamemodify("cooperative/specs/external_apis/mofin_specs.py", ":p")) | buffer cooperative/specs/external_apis/mofin_specs.py | else | edit cooperative/specs/external_apis/mofin_specs.py | endif
+if bufexists(fnamemodify("term://~/Work/MinionEZSetup/MINION//41375:/usr/bin/zsh;\#toggleterm\#1", ":p")) | buffer term://~/Work/MinionEZSetup/MINION//41375:/usr/bin/zsh;\#toggleterm\#1 | else | edit term://~/Work/MinionEZSetup/MINION//41375:/usr/bin/zsh;\#toggleterm\#1 | endif
 if &buftype ==# 'terminal'
-  silent file cooperative/specs/external_apis/mofin_specs.py
+  silent file term://~/Work/MinionEZSetup/MINION//41375:/usr/bin/zsh;\#toggleterm\#1
 endif
-balt cooperative/external_apis/mofin.py
+balt thirdparty/helpers/silkroad.py
 setlocal fdm=manual
 setlocal fde=0
 setlocal fmr={{{,}}}
@@ -73,17 +100,42 @@ setlocal fdl=0
 setlocal fml=1
 setlocal fdn=20
 setlocal fen
-silent! normal! zE
-let &fdl = &fdl
-let s:l = 264 - ((37 * winheight(0) + 21) / 43)
+let s:l = 33 - ((14 * winheight(0) + 7) / 15)
 if s:l < 1 | let s:l = 1 | endif
 keepjumps exe s:l
 normal! zt
-keepjumps 264
+keepjumps 33
+normal! 023|
+wincmd w
+argglobal
+if bufexists(fnamemodify("term://~/Work/MinionEZSetup/MINION//42826:/usr/bin/zsh;\#toggleterm\#2", ":p")) | buffer term://~/Work/MinionEZSetup/MINION//42826:/usr/bin/zsh;\#toggleterm\#2 | else | edit term://~/Work/MinionEZSetup/MINION//42826:/usr/bin/zsh;\#toggleterm\#2 | endif
+if &buftype ==# 'terminal'
+  silent file term://~/Work/MinionEZSetup/MINION//42826:/usr/bin/zsh;\#toggleterm\#2
+endif
+setlocal fdm=manual
+setlocal fde=0
+setlocal fmr={{{,}}}
+setlocal fdi=#
+setlocal fdl=0
+setlocal fml=1
+setlocal fdn=20
+setlocal fen
+let s:l = 6649 - ((14 * winheight(0) + 7) / 15)
+if s:l < 1 | let s:l = 1 | endif
+keepjumps exe s:l
+normal! zt
+keepjumps 6649
 normal! 0
 wincmd w
-exe 'vert 1resize ' . ((&columns * 93 + 94) / 188)
-exe 'vert 2resize ' . ((&columns * 94 + 94) / 188)
+2wincmd w
+exe '1resize ' . ((&lines * 37 + 27) / 55)
+exe 'vert 1resize ' . ((&columns * 30 + 95) / 191)
+exe '2resize ' . ((&lines * 37 + 27) / 55)
+exe 'vert 2resize ' . ((&columns * 160 + 95) / 191)
+exe '3resize ' . ((&lines * 15 + 27) / 55)
+exe 'vert 3resize ' . ((&columns * 95 + 95) / 191)
+exe '4resize ' . ((&lines * 15 + 27) / 55)
+exe 'vert 4resize ' . ((&columns * 95 + 95) / 191)
 tabnext 1
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0 && getbufvar(s:wipebuf, '&buftype') isnot# 'terminal'
   silent exe 'bwipe ' . s:wipebuf

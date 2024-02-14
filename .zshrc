@@ -135,4 +135,13 @@ function stopwatch() {
 
 echo -ne '\e[5 q'
 eval "$(starship init zsh)"
+
 source $HOME/.config/zsh/additional-config.zsh
+
+# pnpm
+export PNPM_HOME="/home/buddha/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

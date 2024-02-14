@@ -1,4 +1,4 @@
-
+lk
 # wm independent hotkeys
 #
 
@@ -14,8 +14,8 @@ super + space
 alt + space
     rofi -show window
 
-super + period
-    /opt/miscellaneous/emoji.sh
+# super + period
+#     /opt/miscellaneous/emoji.sh
     #rofi -show emoji -modi emoji
 
 
@@ -83,8 +83,8 @@ super + {_,shift + }{h,l}
 	bspc node -{f,s} {west,east}
 
 # focus the node for the given path jump
-super + {p,b,comma,period}
-	bspc node -f @{parent,brother,first,second}
+super + {p,b}
+	bspc node -f @{parent,brother}
 
 # focus the next/previous node in the current desktop
 #super + {_,shift + } Tab
@@ -94,8 +94,8 @@ super + {p,b,comma,period}
 super + bracket{left,right}
 	bspc desktop -f {prev,next}.local
     
-super + alt + {comma,period}
-	bspc node -f {next,prev}.local
+# super + alt + {comma,period}
+# 	bspc node -f {next,prev}.local
 #
 # focus or send to next/previous desktop
 super + shift + bracketleft
@@ -162,7 +162,7 @@ super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 super + {j,k} 
-    bspc node -f {prev,next}.local
+    bspc node -f {next,prev}.local
 
 
 #Keyboard Layouts
@@ -181,9 +181,9 @@ XF86AudioMute
 
 #Brightness control
 XF86MonBrightnessDown
-	xbacklight -dec 5
+	light -U 5
 XF86MonBrightnessUp
-	xbacklight -inc 5
+	light -A 5
 
 
 #xdo command
@@ -202,10 +202,8 @@ ctrl + alt + l
     /home/buddha/Applications/gnirehtet-rust-linux64/gnirehtet stop
 
 super + alt + i
-    /opt/miscellaneous/hide.sh
+    /home/buddha/.config/scripts/hide.sh
 
-super + alt + shift + u
-    /opt/miscellaneous/meroshare.sh
 
 #ctrl + period
     #/opt/miscellaneous/emoji.sh
@@ -219,3 +217,12 @@ super + alt + d
 super + alt + t
   terminator 
 
+super + v
+    xfce4-popup-clipman
+
+super + comma 
+	bspc monitor -f next
+
+super + shift + i
+	/home/buddha/.config/scripts/i3lock.sh
+	
