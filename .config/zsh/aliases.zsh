@@ -28,4 +28,4 @@ alias audio-laptop='pacmd set-card-profile 0 output:analog-stereo+input:analog-s
 alias audio-hdmi='pacmd set-card-profile 0 output:hdmi-stereo+input:analog-stereo'
 alias runem='flutter emulators --launch pixel_emulator'
 alias rt='/home/buddha/Applications/gnirehtet-rust-linux64/gnirehtet'
-
+alias tmuxxy='$HOME/.config/scripts/work_automation.sh'
