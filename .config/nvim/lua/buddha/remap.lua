@@ -1,7 +1,6 @@
 vim.keymap.set("n", "<leader>pv", vim.cmd.Ex)
 
 vim.keymap.set("v", "<leader>y", "\"+y")                                             -- copy to global clipboard
-vim.keymap.set("v", "<leader><leader>y", ":call system('nc -N localhost 8377')<CR>") -- copy to clipper clipboard
 
 vim.keymap.set("n", "<leader>y", "\"+y")                                             -- copy to global clipboard
 vim.keymap.set({ "n", "v" }, "<leader>p", "\"+p")                                    -- paste from global clipboard

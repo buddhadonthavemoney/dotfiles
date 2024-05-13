@@ -226,3 +226,8 @@ super + comma
 super + shift + i
 	/home/buddha/.config/scripts/i3lock.sh
 	
+super + shift + {Left,Down,Up,Right}
+	dir={west,south,north,east}; \
+	bspc node -s "$dir.local" --follow \
+	    || bspc node -m "$dir" --follow
+

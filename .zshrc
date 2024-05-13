@@ -1,19 +1,38 @@
 HISTFILE=~/.zsh_history
 HISTSIZE=999999999
 SAVEHIST=$HISTSIZE
-(cat ~/.cache/wal/sequences &)
+# PROMPT='%(?.%F{green}√.%F{red}?%?)%f %B%F{240}%1~%f%b %# '
 
-source $HOME/.config/zsh/autojump.zsh
+autoload -Uz vcs_info
+precmd() {
+    vcs_info
+}
+setopt prompt_subst
+
+if [[ $(hostname) == "anaklusmos" ]]; then
+    echo -ne '\e[5 q'  # This line is just a placeholder, you can put your starship initialization command here
+    eval "$(starship init zsh)"
+	source $HOME/.config/zsh/env_variables.zsh
+	source $HOME/.config/zsh/autojump.zsh
+else
+    PROMPT='%F{green}%n%f %F{yellow}${vcs_info_msg_0_}%F{cyan}%1~%f %# '
+fi
+
+if [[ -f "$HOME/.config/zsh/office.zsh" ]]; then
+    source $HOME/.config/zsh/office.zsh
+fi
+
 source $HOME/.config/zsh/fast-syntax-highlighting/F-Sy-H.plugin.zsh
 source $HOME/.config/zsh/vi-mode.zsh
 source $HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.config/zsh/aliases.zsh
-export FLYCTL_INSTALL="/home/buddha/.fly"
-source $HOME/.config/zsh/env_variables.zsh
+
+
 
 ZSH_AUTOSUGGEST_USE_ASYNC=1 
 bindkey '^ ' autosuggest-accept #autocomplete selection(ctrl+space)
 bindkey -s "^H" "^W" #remap ctrl+w to ctrl+backspace
+#
 #for colors and completion suggestion menu
 autoload -U colors && colors
 autoload -Uz compinit
@@ -21,9 +40,8 @@ autoload -U compinit && compinit -u
 zstyle ':completion:*' menu select
 compinit
 DISABLE_UNTRACKED_FILES_DIRTY="true"
-# linuxlogo -a -l | toilet --metal -f term | lolcat
-array=( green yellow cyan white magenta )
-fm6000 -de BSPWM -r -c ${array[$(($RANDOM%5+1))]}
+# array=( green yellow cyan white magenta )
+# fm6000 -de BSPWM -r -c ${array[$(($RANDOM%5+1))]}
 
 function ranger-cd {
     local IFS=$'\t\n'
@@ -133,15 +151,5 @@ function stopwatch() {
     done
 }
 
-echo -ne '\e[5 q'
-eval "$(starship init zsh)"
-
 source $HOME/.config/zsh/additional-config.zsh
 
-# pnpm
-export PNPM_HOME="/home/buddha/.local/share/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end

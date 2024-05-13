@@ -9,11 +9,12 @@ require("lspconfig")["pyright"].setup({
 				typeCheckingMode = "off",
             },
 			plugins = {
-				flake8 = { enabled = true },
+				flake8 = { enabled = false },
 			}
         },
     },
 })
+lspconfig = require("lspconfig")
 
 lsp_zero.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }

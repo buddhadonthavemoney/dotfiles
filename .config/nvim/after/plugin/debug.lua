@@ -1,8 +1,9 @@
+require"dap-python".setup("python")
 vim.keymap.set("c", "<F5>", "<ESC>:lua require'dap-python'.setup('python')<CR>")
 vim.keymap.set("n", "<C-u>", ":lua require'dap'.continue()<CR>")
 vim.keymap.set("n", "<C-j>", ":lua require'dap'.step_over()<CR>")
 vim.keymap.set("n", "<C-k>", ":lua require'dap'.step_into()<CR>")
-vim.keymap.set("n", "<C-p>", ":lua require'dap'.step_out()<CR>")
+-- vim.keymap.set("n", "<C-p>", ":lua require'dap'.step_out()<CR>")
 vim.keymap.set("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>")
 vim.keymap.set("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
 vim.keymap.set("n", "<leader>lp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: ))<CR>")
@@ -33,7 +34,7 @@ dap.configurations.python = {
         console = "externalTerminal",
         args = {"runserver", "0.0.0.0:20002"},
         django = true,
-        justMyCode = false,
+        justMyCode = true,
     },
 	{
 		type = "python",
@@ -41,9 +42,44 @@ dap.configurations.python = {
 		name = "Django: test",
 		program = "${workspaceFolder}/manage.py",
 		console = "externalTerminal",
-		args = {"test", "d2d"},
+		args = {"test"},
 		justMyCode = true,
-	}
+	},
+	{
+		type = "python",
+		request = "launch",
+		name = "Django: test(specific)",
+		program = "${workspaceFolder}/manage.py",
+		console = "externalTerminal",
+		args = {"test", "autho"},
+		justMyCode = true,
+	},
+    {
+        type = "python",
+        request = "launch",
+        name = "Django: justNotMyCode",
+        program = "${workspaceFolder}/manage.py",
+        console = "externalTerminal",
+        args = {"runserver", "0.0.0.0:20002"},
+        django = true,
+        justMyCode = false,
+    },
+	{
+		type = "python",
+		request = "launch",
+		name = "Django: notebook",
+		program = "${workspaceFolder}/manage.py",
+		console = "externalTerminal",
+		args = {"shell_plus", "--notebook"},
+		justMyCode = true,
+	},
+	{
+		type= "python",
+		request= "launch",
+		name= "Python: Current File",
+		program= "${file}",
+		console= "integratedTerminal",
+	},
 }
 
 require('dap-go').setup {

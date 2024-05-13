@@ -15,6 +15,7 @@ return require('packer').startup(function(use)
 	use "nvim-tree/nvim-tree.lua"
 	use ('ggandor/leap.nvim')
 	use('mbbill/undotree')
+	use('echasnovski/mini.nvim')
 
 	----------- TELESCOPE ------------
 	use {
@@ -60,6 +61,7 @@ return require('packer').startup(function(use)
 	------------ GIT ------------
 	use {'f-person/git-blame.nvim' }
 	use { 'tpope/vim-fugitive' }
+	use { 'tpope/vim-dispatch' }
 
 	------------ LSP ------------  
 	use {'github/copilot.vim' }
@@ -104,8 +106,15 @@ return require('packer').startup(function(use)
 	use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
 	use { 'mfussenegger/nvim-dap-python' }
 	use { 'leoluz/nvim-dap-go' }
+	use { 'nvim-neotest/nvim-nio'}
 
 	------------ TMUX ------------
 	use { "christoomey/vim-tmux-navigator" }
-
+	------------ MISC ------------
+	use({
+		"iamcco/markdown-preview.nvim",
+		run = function() vim.fn["mkdp#util#install"]() end,
+	})
+	------------ DUCK ------------
+    use 'tamton-aquib/duck.nvim'
 end)
