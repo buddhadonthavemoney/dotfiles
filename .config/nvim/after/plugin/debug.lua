@@ -51,7 +51,7 @@ dap.configurations.python = {
 		name = "Django: test(specific)",
 		program = "${workspaceFolder}/manage.py",
 		console = "externalTerminal",
-		args = {"test", "autho"},
+		args = {"test", "-k", "ListingAPITestCase"},
 		justMyCode = true,
 	},
     {
