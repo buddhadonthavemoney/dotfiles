@@ -11,18 +11,6 @@ ZSH_AUTOSUGGEST_USE_ASYNC=1
 bindkey '^ ' autosuggest-accept
 
 
-#export ZSH="/home/buddha/.oh-my-zsh"
-#source $ZSH/oh-my-zsh.sh
-#plugins=(git zsh-syntax-highlighting autojump vi-mode)
-#function virtenv_indicator {
-#    if [[ -z $VIRTUAL_ENV ]] then
-#        psvar[1]=''
-#    else
-#        psvar[1]=${VIRTUAL_ENV##*/}
-#    fi
-#}
-##add-zsh-hook precmd virtenv_indicator
-#ZSH_THEME="robbyrussell"
 
 autoload -U colors && colors
 autoload -Uz compinit

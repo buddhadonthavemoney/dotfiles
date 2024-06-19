@@ -1,7 +1,7 @@
 #! /bin/sh
-#setxkbmap -option caps:escape
+setxkbmap -option caps:escape
 
-$HOME/.config/bspwm/monitor.sh
+$HOME/.config/bspwm/monitor.sh >> /tmp/monitor.log & 
 
 #kill all programs
 pkill sxhkd
@@ -14,19 +14,23 @@ pkill xfce4-clipman
 
 pkill redshift
 pkill redshift
-pkill Obsidian
 # pkill discord
 
 ## GO bin
 PATH="$PATH:/usr/local/go/bin"
-
 
 ##autostart
 #Polybar
 $HOME/.config/polybar/colorblocks/scripts/pywal.sh $(cat .fehbg | grep -oE "'.*'")
 $HOME/.config/polybar/colorblocks/launch.sh
 
-$HOME/Clones/picom/build/src/picom & 
+tmux kill-session -t new_session
+tmux new-session -d -s new_session '/home/buddha/.config/scripts/reverse_server.sh' &
+
+ps -aux | grep battery-status.sh | awk '{print $2}' | xargs kill -9
+$HOME/.config/scripts/battery-status.sh &
+# $HOME/Clones/picom/build/src/picom & 
+picom --experimental-backends --backend glx &
 ~/.fehbg &
 dunst &
 xfce4-clipman &
@@ -34,18 +38,19 @@ nm-applet &
 sxhkd &
 # discord &
 #/opt/miscellaneous/floating.sh &
-# /opt/miscellaneous/drive_sync.sh >> /tmp/.drive_sync.log & 
+/opt/miscellaneous/drive_sync.sh &
 # ./"${HOME}/.cache/wal/colors.sh"
 
 #bspwm
 
-bspc config border_width         0
-bspc config window_gap          10
+bspc config border_width        0 
+bspc config window_gap          5
 
 bspc config split_ratio             0.50
 bspc config borderless_monocle      true
 bspc config gapless_monocle         true
 bspc config focus_follows_pointer   true
+bspc config pointer_follows_monitor true
 
 bspc rule -a Screenkey manage=off
 bspc rule -a discord desktop='^4'
@@ -56,7 +61,7 @@ bspc rule -a M2011K2G state=floating follow=on
 bspc rule -a Google-chrome desktop='^7' follow=on
 bspc rule -a Firefox-esr desktop='^1' follow=on
 bspc rule -a scrcpy state=floating follow=no
-bspc rule -a Terminator state=floating
+bspc rule -a Gnome-calculator state=floating follow=on
 
 #bspc config focused_border_color "123" 
 

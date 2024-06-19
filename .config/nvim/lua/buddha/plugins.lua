@@ -1,102 +1,138 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+-- Install Lazy.nvim if you haven't already
+-- You can place this in your init.lua or a separate file
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
+end
+vim.opt.rtp:prepend(lazypath)
 
--- Only required if you have packer configured as `opt`
-vim.cmd [[packadd packer.nvim]]
+vim.g.mapleader = " "
 
-return require('packer').startup(function(use)
-    -- Packer can manage itself
-    -- use{
-    --     'dylanaraps/wal.vim',
-    --     config = function()
-    --         vim.cmd('colorscheme wal')
-    --     end
-    -- }
 
-    -- use { 'mhartington/formatter.nvim' }
-    use { "christoomey/vim-tmux-navigator" }
-    use "nvim-tree/nvim-tree.lua"
-    use "lukas-reineke/indent-blankline.nvim"
-    use 'windwp/nvim-ts-autotag'
-    use('norcalli/nvim-colorizer.lua')
-    use('github/copilot.vim')
-    use('wbthomason/packer.nvim')
-    use 'francoiscabrol/ranger.vim'
-    use { 'nvim-lualine/lualine.nvim',
-        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+-- Load Lazy.nvim and configure plugins
+require('lazy').setup({
+  ------------ VISUALS ------------
+  { 'mhinz/vim-startify' },
+  {
+    'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons', lazy = true }
+  },
+  {
+    'nvim-treesitter/nvim-treesitter',
+    dependencies = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+    build = function()
+      require('nvim-treesitter.install').update({ with_sync = true })
+    end,
+  },
+
+  ------------ COLORSCHEME ------------
+  { "olimorris/onedarkpro.nvim" },
+  { 'nyoom-engineering/oxocarbon.nvim' },
+  { 'rebelot/kanagawa.nvim' },
+
+  ------------ NAVIGATION ------------
+  { "nvim-tree/nvim-tree.lua" },
+  { 'ggandor/leap.nvim' },
+  { 'mbbill/undotree' },
+  { 'echasnovski/mini.nvim' },
+  { 'talha-akram/noctis.nvim' },
+
+  ----------- TELESCOPE ------------
+  {
+    'nvim-telescope/telescope.nvim', 
+    version = '0.1.4',
+    dependencies = { 'nvim-lua/plenary.nvim' }
+  },
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope-live-grep-args.nvim"
+    },
+    config = function()
+      require("telescope").load_extension("live_grep_args")
+    end
+  },
+
+  ------------ DEVELOPMENT ------------
+  { 'voldikss/vim-floaterm' },
+  {
+    "akinsho/toggleterm.nvim",
+    version = '*',
+    config = function()
+      require("toggleterm").setup()
+    end
+  },
+  { 'terrortylor/nvim-comment' },
+  {
+    'numToStr/Comment.nvim',
+    config = function()
+      require('Comment').setup()
+    end
+  },
+
+  ------------ GIT ------------
+  { 'f-person/git-blame.nvim' },
+  { 'tpope/vim-fugitive' },
+  { 'tpope/vim-dispatch' },
+
+  ------------ LSP ------------
+  { 'github/copilot.vim' },
+  {
+    'VonHeikemen/lsp-zero.nvim',
+    branch = 'v3.x',
+    dependencies = {
+      { 'neovim/nvim-lspconfig' },    -- Required
+      { 'williamboman/mason.nvim' },  -- Optional
+      { 'williamboman/mason-lspconfig.nvim' }, -- Optional
+
+      -- Autocompletion
+      { 'hrsh7th/nvim-cmp' },       -- Required
+      { 'hrsh7th/cmp-nvim-lsp' },   -- Required
+      { 'hrsh7th/cmp-buffer' },     -- Optional
+      { 'hrsh7th/cmp-path' },       -- Optional
+      { 'saadparwaiz1/cmp_luasnip' }, -- Optional
+      { 'hrsh7th/cmp-nvim-lua' },   -- Optional
+      { 'jose-elias-alvarez/null-ls.nvim' }, -- Optional
+      { 'jay-babu/mason-null-ls.nvim' }, -- Optional
+
+      -- Snippets
+      { 'L3MON4D3/LuaSnip' },    -- Required
+      { 'rafamadriz/friendly-snippets' }, -- Optional
     }
-    use('mbbill/undotree')
-    -- use {
-    --     'itchyny/lightline.vim',
-    -- }
-    use 'ThePrimeagen/vim-be-good'
+  },
+  { 'rcarriga/cmp-dap' },
 
-    use 'mhinz/vim-startify'
-    -- use 'vim-airline/vim-airline'
+  ------------ FORMATTER ------------
+  {
+    "nvimdev/guard.nvim",
+    dependencies = {
+      "nvimdev/guard-collection",
+    },
+  },
 
-    use {
-        'nvim-telescope/telescope.nvim', tag = '0.1.1',
-        requires = { { 'nvim-lua/plenary.nvim' } }
-    }
-    use {
-        "nvim-telescope/telescope-file-browser.nvim",
-        requires = { "nvim-telescope/telescope.nvim", "nvim-lua/plenary.nvim" }
-    }
+  ------------ DEBUGGER & TESTS ------------
+  { 'mfussenegger/nvim-dap' },
+  { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
+  { 'mfussenegger/nvim-dap-python' },
+  { 'leoluz/nvim-dap-go' },
+  { 'nvim-neotest/nvim-nio' },
 
-    -- use 'terrortylor/nvim-comment'
-    use {
-        'numToStr/Comment.nvim',
-        config = function()
-            require('Comment').setup()
-        end
-    }
+  ------------ TMUX ------------
+  { "christoomey/vim-tmux-navigator" },
 
-    use {
-        "olimorris/onedarkpro.nvim",
-        as = 'onedark-vivid',
-        -- config = function()
-        --     vim.cmd('colorscheme onedark_vivid')
-        -- end
-    }
-    -- install without yarn or npm
-    use({
-        "iamcco/markdown-preview.nvim",
-        run = function() vim.fn["mkdp#util#install"]() end,
-    })
-
-    -- use({ "iamcco/markdown-preview.nvim", run = "cd app && npm install", setup = function() vim.g.mkdp_filetypes = { "markdown" } end, ft = { "markdown" }, })
-
-    use {
-        'nvim-treesitter/nvim-treesitter',
-        requires = { 'JoosepAlviste/nvim-ts-context-commentstring' },
-        run = function()
-            local ts_update = require('nvim-treesitter.install').update({ with_sync = true })
-            ts_update()
-        end,
-
-    }
-
-    use {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v1.x',
-        requires = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },             -- Required
-            { 'williamboman/mason.nvim' },           -- Optional
-            { 'williamboman/mason-lspconfig.nvim' }, -- Optional
-
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },                -- Required
-            { 'hrsh7th/cmp-nvim-lsp' },            -- Required
-            { 'hrsh7th/cmp-buffer' },              -- Optional
-            { 'hrsh7th/cmp-path' },                -- Optional
-            { 'saadparwaiz1/cmp_luasnip' },        -- Optional
-            { 'hrsh7th/cmp-nvim-lua' },            -- Optional
-            { 'jose-elias-alvarez/null-ls.nvim' }, -- Optional
-            { 'jay-babu/mason-null-ls.nvim' },     -- Optional
-
-            -- Snippets
-            { 'L3MON4D3/LuaSnip' },             -- Required
-            { 'rafamadriz/friendly-snippets' }, -- Optional
-        }
-    }
-end)
+  ------------ MISC ------------
+  {
+    "iamcco/markdown-preview.nvim",
+    build = function() vim.fn["mkdp#util#install"]() end,
+  },
+  { 'tamton-aquib/duck.nvim' },
+})

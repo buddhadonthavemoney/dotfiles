@@ -1,0 +1,5 @@
+vim.keymap.set("n", "<leader>gs", ":Git stash<CR>:e<CR>")
+vim.keymap.set("n", "<leader>gp", ":Git stash pop<CR>:e<CR>")
+vim.keymap.set("n", "<leader>gps", ":Dispatch! git push<CR>")
+vim.keymap.set("n", "<leader>gpl", ":Dispatch! git pull<CR>")
+vim.keymap.set("n", "<leader>G", ":G<CR>")

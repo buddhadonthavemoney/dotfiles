@@ -1,54 +1,86 @@
-local lsp = require('lsp-zero').preset({
-    name = 'minimal',
-    set_lsp_keymaps = true,
-    manage_nvim_cmp = true,
-    suggest_lsp_servers = false,
-})
+local lsp_zero = require('lsp-zero')
 
-require("mason").setup()
-require("mason-lspconfig").setup {
-    ensure_installed = {
-        "lua_ls",
-        'tsserver',
-        'eslint',
-        'html',
-        'pylsp',
+require("lspconfig")["pyright"].setup({
+    settings = {
+        python = {
+            analysis = {
+                maxLineLength = 120, -- Set your desired line length
+				useLibraryCodeForTypes = true,
+				typeCheckingMode = "off",
+            },
+			plugins = {
+				flake8 = { enabled = false },
+			}
+        },
     },
-}
--- require("mason-null-ls").setup({
---     handlers = {},
--- })
-
-
-lsp.format_on_save({
-    servers = {
-        ['lua_ls'] = { 'lua' },
-        ['rust_analyzer'] = { 'rust' },
-        ['pylsp'] = { 'py', 'python' },
-        -- ['py_lsp'] = { 'py' },
-        ['markdown_lint'] = { 'md' },
-        ['omnisharp'] = { 'cs', 'vb' },
-        ['html'] = { 'html', 'css' },
-        ['tsserver'] = { 'ts', 'js', 'javascript', 'typescript' }
-    }
 })
+lspconfig = require("lspconfig")
 
-
--- (Optional) Configure lua language server for neovim
-lsp.nvim_workspace()
-lsp.on_attach(function(client, bufnr)
+lsp_zero.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
-
     vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
-    vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
-    vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_prev() end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set({ "n", "v" }, "<leader>ca", function() vim.lsp.buf.code_action() end, opts)
-    vim.keymap.set("n", "<leader>r", function() vim.lsp.buf.references() end, opts)
+    vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
     vim.keymap.set("n", "<F2>", function() vim.lsp.buf.rename() end, opts)
     vim.keymap.set("n", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
 end)
 
-lsp.setup()
+
+lsp_zero.set_sign_icons({
+	error = '✘',
+	warn = '▲',
+	hint = '⚑',
+	info = '»'
+})
+
+--- if you want to know more about lsp-zero and mason.nvim
+--- read this: https://github.com/VonHeikemen/lsp-zero.nvim/blob/v3.x/doc/md/guides/integrate-with-mason-nvim.md
+require('mason').setup({})
+require('mason-lspconfig').setup({
+	handlers = {
+		lsp_zero.default_setup,
+		lua_ls = function()
+			-- (Optional) configure lua language server
+			local lua_opts = lsp_zero.nvim_lua_ls()
+			require('lspconfig').lua_ls.setup(lua_opts)
+		end,
+	},
+	ensure_installed = { "lua_ls", "rust_analyzer", "pyright", "pylsp" },
+})
+
+
+local cmp = require('cmp')
+local cmp_action = require('lsp-zero').cmp_action()
+
+
+cmp.setup({
+  enabled = function()
+    return vim.api.nvim_buf_get_option(0, "buftype") ~= "prompt"
+        or require("cmp_dap").is_dap_buffer()
+  end,
+  mapping = cmp.mapping.preset.insert({
+    -- `Enter` key to confirm completion
+    ['<CR>'] = cmp.mapping.confirm({select = false}),
+
+    -- Ctrl+Space to trigger completion menu
+	['<Tab>'] = cmp.mapping.select_next_item({ behavior = cmp.SelectBehavior.Insert }),
+	['<S-Tab>'] = cmp.mapping.select_prev_item({ behavior = cmp.SelectBehavior.Insert }),
+
+    -- Navigate between snippet placeholder
+    ['<C-f>'] = cmp_action.luasnip_jump_forward(),
+    ['<C-b>'] = cmp_action.luasnip_jump_backward(),
+
+    -- Scroll up and down in the completion documentation
+    ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-d>'] = cmp.mapping.scroll_docs(4),
+  })
+})
+
+cmp.setup.filetype({ "dap", "dap-repl", "dapui_watches" }, {
+  sources = {
+    { name = "dap" },
+  },
+})
