@@ -12,7 +12,10 @@ super + space
     rofi -show drun
 
 alt + space
-    rofi -show window
+	rofi -show window -window-thumbnail -show-icons 
+
+super + alt + space
+	rofi -show windowcd -window-thumbnail -show-icons
 
 # super + period
 #     /opt/miscellaneous/emoji.sh
@@ -187,20 +190,14 @@ XF86MonBrightnessUp
 
 
 #xdo command
-ctrl + alt + h
-    xdo hide
-
-ctrl + alt + u
-    xdo show -dr
+# ctrl + alt + h
+#     xdo hide
+#
+# ctrl + alt + u
+#     xdo show -dr
 
 #custom commands
     
-ctrl + alt + k
-    /home/buddha/Applications/gnirehtet-rust-linux64/gnirehtet start
-
-ctrl + alt + l
-    /home/buddha/Applications/gnirehtet-rust-linux64/gnirehtet stop
-
 super + alt + i
     /home/buddha/.config/scripts/hide.sh
 
@@ -230,4 +227,7 @@ super + shift + {Left,Down,Up,Right}
 	dir={west,south,north,east}; \
 	bspc node -s "$dir.local" --follow \
 	    || bspc node -m "$dir" --follow
+
+super + ctrl + o
+	/home/buddha/.config/scripts/neovide.sh
 

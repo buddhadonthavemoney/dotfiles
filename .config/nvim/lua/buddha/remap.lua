@@ -24,5 +24,6 @@ vim.keymap.set("i", "<C-BS>", "<C-W>")
 
 vim.keymap.set("n", "<leader>mp", ":MarkdownPreview<CR>")
 
-vim.keymap.set("c", "sv", "source /home/buddha/.config/nvim/init.lua<CR>")
+vim.keymap.set("c", "sv", "source ~/.config/nvim/init.lua<CR>")
 vim.keymap.set("n", "<leader>e", ":set noexpandtab<CR>:%retab!<CR>")
+vim.keymap.set("n", "<leader><leader>e", ":set expandtab<CR>:%retab!<CR>")
