@@ -4,6 +4,8 @@ vim.keymap.set("n", "<C-u>", ":lua require'dap'.continue()<CR>")
 vim.keymap.set("n", "<C-j>", ":lua require'dap'.step_over()<CR>")
 vim.keymap.set("n", "<C-k>", ":lua require'dap'.step_into()<CR>")
 -- vim.keymap.set("n", "<C-p>", ":lua require'dap'.step_out()<CR>")
+vim.keymap.set("n", "<leader>ls", ":lua require'dap'.<CR>")
+
 vim.keymap.set("n", "<leader>b", ":lua require'dap'.toggle_breakpoint()<CR>")
 vim.keymap.set("n", "<leader>B", ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
 vim.keymap.set("n", "<leader>lp", ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: ))<CR>")
@@ -23,6 +25,18 @@ vim.keymap.set('n', '<Leader>ds', function()
 	local widgets = require('dap.ui.widgets')
 	widgets.centered_float(widgets.scopes)
 end)
+
+vim.api.nvim_create_autocmd("FileType", {
+    pattern = "dap-float",
+    callback = function()
+        vim.api.nvim_buf_set_keymap(0, "n", "q", "<cmd>close!<CR>", { noremap = true, silent = true })
+    end
+})
+-- local function get_port()
+--     -- Function to prompt user for a port
+--     local port = vim.fn.input("Enter the port number: ", "20002")
+--     return port
+-- end
 
 local dap = require("dap")
 dap.configurations.python = {
@@ -70,7 +84,16 @@ dap.configurations.python = {
 		name = "Django: notebook",
 		program = "${workspaceFolder}/manage.py",
 		console = "externalTerminal",
-		args = {"shell_plus", "--notebook"},
+		args = {"shell", "--notebook"},
+		justMyCode = true,
+	},
+	{
+		type = "python",
+		request = "launch",
+		name = "Django: notebook",
+		program = "${workspaceFolder}/manage.py",
+		console = "externalTerminal",
+		args = {"permissions_update"},
 		justMyCode = true,
 	},
 	{
@@ -80,6 +103,25 @@ dap.configurations.python = {
 		program= "${file}",
 		console= "integratedTerminal",
 	},
+
+	{
+		type= "python",
+		request= "launch",
+		name= "temp:nepse-cli",
+		program= "nepse-cli",
+		args = {"--start-server"},
+		console= "integratedTerminal",
+	},
+	-- {
+ --        type = "python",
+ --        request = "launch",
+ --        name = "Django: Launch with Port",
+ --        program = "${workspaceFolder}/manage.py",
+ --        console = "externalTerminal",
+ --        args = {"runserver", "0.0.0.0:" .. get_port()},
+ --        django = true,
+ --        justMyCode = true,
+ --    },
 }
 
 require('dap-go').setup {

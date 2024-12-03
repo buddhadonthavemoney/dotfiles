@@ -23,3 +23,8 @@ alias audio-hdmi='pacmd set-card-profile 0 output:hdmi-stereo+input:analog-stere
 alias runem='flutter emulators --launch pixel_emulator'
 alias rt='/home/buddha/Applications/gnirehtet-rust-linux64/gnirehtet'
 alias nvimh="nvim --headless --listen 0.0.0.0:6969"
+alias clipimg="xclip -selection clipboard -t image/png -o > /tmp/clipboard.png"
+
+alias pm="python manage.py"
+alias mm="python manage.py makemigrations"
+alias mi="python manage.py migrate"

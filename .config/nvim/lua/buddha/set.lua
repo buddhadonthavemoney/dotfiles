@@ -26,6 +26,7 @@ vim.o.wrap = false     -- text wont wrap
 vim.o.scrolloff = 8    -- min number of scroll lines to keep above or below a cursor
 
 
-vim.g.rooter_patterns = { "manage.py", "Makefile", "*.sln", "build/env.sh", "Dockerfile", "requirements.txt", "Cargo.toml" }
+vim.g.rooter_patterns = { "manage.py", "Makefile", "*.sln", "build/env.sh", "Dockerfile", "requirements.txt",
+	"Cargo.toml", "requirements" }
 
 -- vim.g.mkdp_auto_start = "1"

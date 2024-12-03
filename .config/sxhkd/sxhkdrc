@@ -4,19 +4,22 @@ lk
 
 # terminal emulator
 super + Return
-   /bin/kitty 
+	/home/buddha/.local/bin/kitty
 
 
 # rofi launcher
 super + space
     rofi -show drun
 
+super + alt + space
+	rofi -show run
+
 alt + space
     rofi -show window
 
-# super + period
-#     /opt/miscellaneous/emoji.sh
-    #rofi -show emoji -modi emoji
+super + period
+    /opt/miscellaneous/emoji.sh
+    rofi -show emoji -modi emoji
 
 
 # make sxhkd reload its configuration files:
@@ -126,8 +129,8 @@ super + {_,shift + }{1-9,0}
 #
 
 # preselect the direction
-super + ctrl + {h,j,k,l}
-	bspc node -p {west,south,north,east}
+# super + ctrl + {h,j,k,l}
+# 	bspc node -p {west,south,north,east}
 
 # preselect the ratio
 super + ctrl + {1-9}
@@ -187,20 +190,14 @@ XF86MonBrightnessUp
 
 
 #xdo command
-ctrl + alt + h
-    xdo hide
-
-ctrl + alt + u
-    xdo show -dr
+# ctrl + alt + h
+#     xdo hide
+#
+# ctrl + alt + u
+#     xdo show -dr
 
 #custom commands
     
-ctrl + alt + k
-    /home/buddha/Applications/gnirehtet-rust-linux64/gnirehtet start
-
-ctrl + alt + l
-    /home/buddha/Applications/gnirehtet-rust-linux64/gnirehtet stop
-
 super + alt + i
     /home/buddha/.config/scripts/hide.sh
 
@@ -231,3 +228,5 @@ super + shift + {Left,Down,Up,Right}
 	bspc node -s "$dir.local" --follow \
 	    || bspc node -m "$dir" --follow
 
+super + control + {j, k}
+	bspc node @parent --rotate {90,270}

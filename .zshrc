@@ -22,10 +22,10 @@ if [[ -f "$HOME/.config/zsh/office.zsh" ]]; then
     source $HOME/.config/zsh/office.zsh
 fi
 
-source $HOME/.config/zsh/fast-syntax-highlighting/F-Sy-H.plugin.zsh
 source $HOME/.config/zsh/vi-mode.zsh
-source $HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $HOME/.config/zsh/aliases.zsh
+source $HOME/.config/zsh/fast-syntax-highlighting/F-Sy-H.plugin.zsh
+source $HOME/.config/zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 
 

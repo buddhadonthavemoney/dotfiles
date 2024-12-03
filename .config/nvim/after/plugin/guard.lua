@@ -1,7 +1,13 @@
 local ft = require('guard.filetype')
 
 -- Assuming you have guard-collection
-ft('python'):fmt("black")
+local black = {
+  cmd = 'black',
+  args = { '--line-length','120', '--quiet', '-' },
+  stdin = true,
+}
+
+ft('python'):fmt(black)
 
 -- Call setup() LAST!
 require('guard').setup({

@@ -15,7 +15,7 @@ echo "---" | tee -a /tmp/polybar1.log /tmp/polybar2.log
 polybar -q main -c "$DIR"/config.ini >>/tmp/polybar1.log 2>&1 & 
 polybar -q bottom -c "$DIR"/config.ini >> /tmp/polybar2.log 2>&1 &
 
-if [[ $(xrandr -q | grep 'HDMI-1 connected') ]]; then
+if [[ $(xrandr -q | grep 'HDMI1 connected') ]]; then
     polybar -q another_monitor -c "$DIR"/config.ini >>/tmp/polybar3.log 2>&1 & 
     echo asdf >>/tmp/polyabar3.log
 fi

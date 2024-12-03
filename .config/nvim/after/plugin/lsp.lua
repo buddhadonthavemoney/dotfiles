@@ -14,7 +14,7 @@ require("lspconfig")["pyright"].setup({
         },
     },
 })
-lspconfig = require("lspconfig")
+local lspconfig = require("lspconfig")
 
 lsp_zero.on_attach(function(client, bufnr)
     local opts = { buffer = bufnr, remap = false }
@@ -48,7 +48,8 @@ require('mason-lspconfig').setup({
 			require('lspconfig').lua_ls.setup(lua_opts)
 		end,
 	},
-	ensure_installed = { "lua_ls", "rust_analyzer", "pyright", "pylsp" },
+	-- ensure_installed = { "lua_ls", "rust_analyzer", "pylsp", "pyright", "ruff" },
+	ensure_installed = { "lua_ls", "rust_analyzer", "ruff" },
 })
 
 
