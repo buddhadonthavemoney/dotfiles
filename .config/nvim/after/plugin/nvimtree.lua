@@ -18,11 +18,11 @@ require("nvim-tree").setup({
 		group_empty = true,
 	},
 	filters = {
-		dotfiles = false,
+		dotfiles = true,
 	},
 	git = {
 		enable = true,
-		ignore = false,
+		ignore = true,
 		timeout = 500,
 	},
 	diagnostics = {
