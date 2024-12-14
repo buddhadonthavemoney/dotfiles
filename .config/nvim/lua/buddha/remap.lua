@@ -17,8 +17,8 @@ vim.keymap.set("n", "<C-u>", "<C-u>zz")
 vim.keymap.set("n", "n", "nzzzv")
 vim.keymap.set("n", "N", "Nzzzv")
 
-vim.keymap.set("v", "<leader>d", "\"_d")   -- deleting to void register
-vim.keymap.set("n", "<leader>dd", "\"_dd") -- deleting to void register
+vim.keymap.set("v", "<leader>d", "\"+d")   -- deleting to void register
+vim.keymap.set("n", "<leader>dd", "\"+dd") -- deleting to void register
 
 vim.keymap.set("i", "<C-BS>", "<C-W>")
 
